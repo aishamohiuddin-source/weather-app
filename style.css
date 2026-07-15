@@ -1,12 +1,11 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1d2b64, #f8cdda);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.5s;
 }
 
 .container {
@@ -14,55 +13,61 @@ body {
   color: white;
 }
 
+h1 {
+  margin-bottom: 20px;
+}
+
 .search-box {
-  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 input {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  width: 230px;
+  border-radius: 12px;
   border: none;
   outline: none;
-  width: 220px;
 }
 
 button {
-  padding: 10px 15px;
+  padding: 12px 15px;
+  border-radius: 12px;
   border: none;
-  border-radius: 10px;
   background: #ff7eb3;
   color: white;
   cursor: pointer;
 }
 
-button:hover {
-  background: #ff4f8b;
-}
-
 .weather-card {
   margin-top: 20px;
+  width: 330px;
   padding: 20px;
-  width: 320px;
   border-radius: 20px;
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  transition: 0.3s;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-.weather-card:hover {
-  transform: scale(1.05);
+.top {
+  text-align: center;
 }
 
-.weather-card img {
+.top img {
   width: 80px;
 }
 
-h1 {
-  animation: fadeIn 1s ease-in;
+.details {
+  margin-top: 15px;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+.details div {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.2);
+  font-size: 14px;
 }

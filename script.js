@@ -56,17 +56,25 @@ function displayWeather(data) {
 
   const icon = data.weather[0].icon;
 
+  const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+  const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+
   card.innerHTML = `
-    <h2>${data.name}, ${data.sys.country}</h2>
-    <img src="https://openweathermap.org/img/wn/${icon}@2x.png">
+    <div class="top">
+      <h2>${data.name}, ${data.sys.country}</h2>
+      <img src="https://openweathermap.org/img/wn/${icon}@2x.png">
+      <h1>${data.main.temp}°C</h1>
+      <p>${data.weather[0].description}</p>
+    </div>
 
-    <h1>${data.main.temp}°C</h1>
-    <p>${data.weather[0].description}</p>
-
-    <p>🤒 Feels: ${data.main.feels_like}°C</p>
-    <p>💧 Humidity: ${data.main.humidity}%</p>
-    <p>🌬 Wind: ${data.wind.speed} m/s</p>
-    <p>🌡 Max: ${data.main.temp_max}°C | Min: ${data.main.temp_min}°C</p>
+    <div class="details">
+      <div><span>Feels Like</span><span>${data.main.feels_like}°C</span></div>
+      <div><span>Humidity</span><span>${data.main.humidity}%</span></div>
+      <div><span>Wind</span><span>${data.wind.speed} m/s</span></div>
+      <div><span>Pressure</span><span>${data.main.pressure} hPa</span></div>
+      <div><span>Sunrise</span><span>${sunrise}</span></div>
+      <div><span>Sunset</span><span>${sunset}</span></div>
+    </div>
   `;
 }
 
@@ -106,3 +114,9 @@ async function getForecast(city) {
 
   document.getElementById("weather-card").innerHTML += html;
 }
+
+document.getElementById("city").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    getWeather();
+  }
+});
