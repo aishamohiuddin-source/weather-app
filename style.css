@@ -6,6 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s;
 }
 
 .container {
@@ -19,16 +20,16 @@ body {
 
 input {
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   outline: none;
-  width: 200px;
+  width: 220px;
 }
 
 button {
   padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #ff7eb3;
   color: white;
   cursor: pointer;
@@ -41,13 +42,27 @@ button:hover {
 .weather-card {
   margin-top: 20px;
   padding: 20px;
-  width: 300px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  width: 320px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.weather-card:hover {
+  transform: scale(1.05);
 }
 
 .weather-card img {
   width: 80px;
+}
+
+h1 {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
