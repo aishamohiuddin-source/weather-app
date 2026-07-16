@@ -1,206 +1,101 @@
-const apiKey = "50b421d4a765aa82039d19a3fdc7092a";
+const API_KEY = "50b421d4a765aa82039d19a3fdc7092a";
 
-// Search Button
-document.getElementById("searchBtn").addEventListener("click", getWeather);
+// Default city
+const CITY = "Lahore";
 
-// Enter Key
-document.getElementById("cityInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        getWeather();
-    }
-});
+// ----------------------------
 
-// Location Button
-document.getElementById("locationBtn").addEventListener("click", getLocation);
+const temperature = document.getElementById("temperature");
+const description = document.getElementById("description");
+const weatherIcon = document.getElementById("weatherIcon");
 
-// ===============================
-// Search Weather
-// ===============================
+const highTemp = document.getElementById("highTemp");
+const lowTemp = document.getElementById("lowTemp");
 
-async function getWeather() {
+const morningTemp = document.getElementById("morningTemp");
+const afternoonTemp = document.getElementById("afternoonTemp");
+const eveningTemp = document.getElementById("eveningTemp");
+const nightTemp = document.getElementById("nightTemp");
 
-    const cityName = document.getElementById("cityInput").value.trim();
+// ----------------------------
+// Time & Date
+// ----------------------------
 
-    if (!cityName) {
-        alert("Please enter city name");
-        return;
-    }
+function updateClock() {
 
-    try {
+    const now = new Date();
 
-        const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
-        );
-
-        const data = await res.json();
-
-        if (data.cod != 200) {
-            alert("City not found");
-            return;
-        }
-
-        showWeather(data);
-        getForecast(cityName);
-        getHourly(cityName);
-
-    } catch (error) {
-        console.log(error);
-        alert("Something went wrong");
-    }
-}
-
-// ===============================
-// Show Weather
-// ===============================
-
-function showWeather(data) {
-
-    document.getElementById("city").innerText =
-        `${data.name}, ${data.sys.country}`;
-
-    document.getElementById("temperature").innerText =
-        `${Math.round(data.main.temp)}°C`;
-
-    document.getElementById("description").innerText =
-        data.weather[0].description;
-
-    document.getElementById("feelsLike").innerText =
-        `${Math.round(data.main.feels_like)}°C`;
-
-    document.getElementById("humidity").innerText =
-        `${data.main.humidity}%`;
-
-    document.getElementById("wind").innerText =
-        `${data.wind.speed} km/h`;
-
-    document.getElementById("pressure").innerText =
-        `${data.main.pressure} hPa`;
-
-    document.getElementById("visibility").innerText =
-        `${data.visibility / 1000} km`;
-
-    document.getElementById("maxTemp").innerText =
-        `H: ${Math.round(data.main.temp_max)}°`;
-
-    document.getElementById("minTemp").innerText =
-        `L: ${Math.round(data.main.temp_min)}°`;
-
-    document.getElementById("weatherIcon").src =
-        `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-
-    changeBackground(data.weather[0].main);
-}
-
-// ===============================
-// Background
-// ===============================
-
-function changeBackground(weather) {
-
-    if (weather === "Clear") {
-        document.body.style.background = "linear-gradient(135deg,#f6d365,#fda085)";
-    } else if (weather === "Clouds") {
-        document.body.style.background = "linear-gradient(135deg,#757f9a,#d7dde8)";
-    } else if (weather === "Rain") {
-        document.body.style.background = "linear-gradient(135deg,#4facfe,#00f2fe)";
-    } else if (weather === "Snow") {
-        document.body.style.background = "linear-gradient(135deg,#e6dada,#274046)";
-    } else {
-        document.body.style.background = "linear-gradient(135deg,#0f2027,#203a43)";
-    }
-}
-
-// ===============================
-// Location
-// ===============================
-
-function getLocation() {
-
-    navigator.geolocation.getCurrentPosition(async (position) => {
-
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-        );
-
-        const data = await res.json();
-
-        showWeather(data);
-        getForecast(data.name);
-        getHourly(data.name);
-
-    }, () => {
-
-        alert("Location permission denied");
-
-    });
-
-}
-
-// ===============================
-// Weekly Forecast
-// ===============================
-
-async function getForecast(city) {
-
-    const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
-    );
-
-    const data = await res.json();
-
-    const forecast = document.getElementById("weeklyForecast");
-
-    forecast.innerHTML = "";
-
-    for (let i = 0; i < data.list.length; i += 8) {
-
-        const item = data.list[i];
-
-        const day = new Date(item.dt_txt).toLocaleDateString("en-US", {
-            weekday: "short"
+    document.getElementById("time").innerHTML =
+        now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
         });
 
-        forecast.innerHTML += `
-        <div class="forecast-card">
-            <h3>${day}</h3>
-            <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
-            <p>${Math.round(item.main.temp)}°C</p>
-        </div>
-        `;
-    }
+    document.getElementById("day").innerHTML =
+        now.toLocaleDateString([], {
+            weekday: "long"
+        });
+
+    document.getElementById("date").innerHTML =
+        now.toLocaleDateString([], {
+            month: "long",
+            day: "numeric"
+        });
+
 }
 
-// ===============================
-// Hourly Forecast
-// ===============================
+updateClock();
 
-async function getHourly(city) {
+setInterval(updateClock,1000);
 
-    const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
-    );
+// ----------------------------
+// Current Weather
+// ----------------------------
 
-    const data = await res.json();
+async function loadWeather(){
 
-    const hourly = document.getElementById("hourlyForecast");
+    try{
 
-    hourly.innerHTML = "";
+        const url =
+`https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&appid=${API_KEY}`;
 
-    for (let i = 0; i < 8; i++) {
+        const response = await fetch(url);
 
-        const item = data.list[i];
+        const data = await response.json();
 
-        const time = item.dt_txt.split(" ")[1].slice(0, 5);
+        temperature.innerHTML =
+        Math.round(data.main.temp)+"°C";
 
-        hourly.innerHTML += `
-        <div class="hour-card">
-            <h3>${time}</h3>
-            <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
-            <p>${Math.round(item.main.temp)}°C</p>
-        </div>
-        `;
+        description.innerHTML =
+        data.weather[0].main;
+
+        highTemp.innerHTML =
+        Math.round(data.main.temp_max)+"°";
+
+        lowTemp.innerHTML =
+        Math.round(data.main.temp_min)+"°";
+
+        weatherIcon.src =
+`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
     }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
 }
+
+loadWeather();
+
+// ----------------------------
+// Demo values
+// (Replace later with Forecast API)
+// ----------------------------
+
+morningTemp.innerHTML="17°";
+afternoonTemp.innerHTML="21°";
+eveningTemp.innerHTML="19°";
+nightTemp.innerHTML="13°";

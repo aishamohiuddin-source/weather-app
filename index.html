@@ -1,204 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherX Pro</title>
+
+    <title>Weather Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-<div class="overlay"></div>
+    <div class="overlay"></div>
 
-<div class="container">
+    <div class="container">
 
-<header>
+        <!-- Current Weather -->
 
-<div class="search-box">
+        <section class="current-weather glass">
 
-<input
-type="text"
-id="cityInput"
-placeholder="Search city...">
+            <div class="top">
 
-<button id="searchBtn">
-<i class="fas fa-search"></i>
-</button>
+                <div class="day">
+                    <h3 id="day">Thursday</h3>
+                </div>
 
-<button id="locationBtn">
-<i class="fas fa-location-crosshairs"></i>
-</button>
+                <div class="date">
+                    <h3 id="date">October 23</h3>
+                </div>
 
-</div>
+            </div>
 
-</header>
+            <div class="center">
 
-<section class="main-card">
+                <h1 id="time">07:35 PM</h1>
 
-<div class="top">
+                <img id="weatherIcon"
+                    src="https://openweathermap.org/img/wn/10d@2x.png"
+                    alt="weather">
 
-<div>
+                <h2 id="temperature">19°C</h2>
 
-<h2 id="city">City</h2>
+                <p id="description">Rain</p>
 
-<p id="date">Loading...</p>
+            </div>
 
-</div>
+            <div class="bottom">
 
-<div class="clock" id="clock">
+                <div>
+                    <small>Hi</small>
+                    <h2 id="highTemp">21°</h2>
+                </div>
 
---:--
+                <div>
+                    <small>Lo</small>
+                    <h2 id="lowTemp">13°</h2>
+                </div>
 
-</div>
+            </div>
 
-</div>
+        </section>
 
-<div class="weather-icon">
+        <!-- Time Cards -->
 
-<img id="weatherIcon" src="" alt="weather">
+        <section class="cards">
 
-</div>
+            <div class="card glass">
 
-<h1 id="temperature">
+                <h4>MORNING</h4>
 
---°C
+                <img src="https://openweathermap.org/img/wn/03d@2x.png">
 
-</h1>
+                <h2 id="morningTemp">17°</h2>
 
-<p id="description">
+            </div>
 
-Loading...
+            <div class="card glass">
 
-</p>
+                <h4>AFTERNOON</h4>
 
-<div class="high-low">
+                <img src="https://openweathermap.org/img/wn/02d@2x.png">
 
-<span id="maxTemp">
+                <h2 id="afternoonTemp">21°</h2>
 
-H: --
+            </div>
 
-</span>
+            <div class="card glass">
 
-<span id="minTemp">
+                <h4>EVENING</h4>
 
-L: --
+                <img src="https://openweathermap.org/img/wn/10n@2x.png">
 
-</span>
+                <h2 id="eveningTemp">19°</h2>
 
-</div>
+            </div>
 
-</section>
+            <div class="card glass">
 
-<section class="details">
+                <h4>OVERNIGHT</h4>
 
-<div class="box">
+                <img src="https://openweathermap.org/img/wn/04n@2x.png">
 
-<i class="fas fa-temperature-half"></i>
+                <h2 id="nightTemp">13°</h2>
 
-<h4>Feels Like</h4>
+            </div>
 
-<p id="feelsLike">--°</p>
+        </section>
 
-</div>
+        <!-- Forecast -->
 
-<div class="box">
+        <section class="forecast">
 
-<i class="fas fa-droplet"></i>
+            <div class="forecast-row glass">
 
-<h4>Humidity</h4>
+                <div class="forecast-day">
+                    Friday
+                </div>
 
-<p id="humidity">--%</p>
+                <img src="https://openweathermap.org/img/wn/11d@2x.png">
 
-</div>
+                <div>Morning <span>13°</span></div>
 
-<div class="box">
+                <div>Afternoon <span>18°</span></div>
 
-<i class="fas fa-wind"></i>
+                <div>Evening <span>15°</span></div>
 
-<h4>Wind</h4>
+                <div>Overnight <span>11°</span></div>
 
-<p id="wind">-- km/h</p>
+            </div>
 
-</div>
+            <div class="forecast-row glass">
 
-<div class="box">
+                <div class="forecast-day">
+                    Saturday
+                </div>
 
-<i class="fas fa-gauge-high"></i>
+                <img src="https://openweathermap.org/img/wn/10d@2x.png">
 
-<h4>Pressure</h4>
+                <div>Morning <span>13°</span></div>
 
-<p id="pressure">----</p>
+                <div>Afternoon <span>18°</span></div>
 
-</div>
+                <div>Evening <span>15°</span></div>
 
-<div class="box">
+                <div>Overnight <span>11°</span></div>
 
-<i class="fas fa-eye"></i>
+            </div>
 
-<h4>Visibility</h4>
+            <div class="forecast-row glass">
 
-<p id="visibility">-- km</p>
+                <div class="forecast-day">
+                    Sunday
+                </div>
 
-</div>
+                <img src="https://openweathermap.org/img/wn/01d@2x.png">
 
-<div class="box">
+                <div>Morning <span>13°</span></div>
 
-<i class="fas fa-sun"></i>
+                <div>Afternoon <span>18°</span></div>
 
-<h4>UV Index</h4>
+                <div>Evening <span>15°</span></div>
 
-<p id="uv">--</p>
+                <div>Overnight <span>11°</span></div>
 
-</div>
+            </div>
 
-</section>
+        </section>
 
-<section>
+    </div>
 
-<h2 class="title">
-
-Today's Forecast
-
-</h2>
-
-<div id="hourlyForecast" class="hourly">
-
-</div>
-
-</section>
-
-<section>
-
-<h2 class="title">
-
-7-Day Forecast
-
-</h2>
-
-<div id="weeklyForecast" class="weekly">
-
-</div>
-
-</section>
-
-<footer>
-
-Made with ❤️ by Aisha
-
-</footer>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
