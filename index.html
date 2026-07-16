@@ -1,75 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weather App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherX Pro</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
+
 <body>
 
-<div class="app">
+<div class="overlay"></div>
 
-  <!-- Search -->
-  <div class="search-box">
-    <input type="text" id="cityInput" placeholder="Search city...">
-    <button onclick="getWeather()">🔍</button>
-    <button onclick="getLocation()">📍</button>
-  </div>
+<div class="container">
 
-  <!-- Weather Main -->
-  <div class="weather-box">
-    <h2 id="city">City</h2>
-    <img id="icon" src="" />
-    <p id="desc">---</p>
-  </div>
-  <div class="temp-box">
-  <span id="temp">--</span>
-  <span class="degree">°C</span>
-</div>
-<div class="hourly">
+<header>
 
-  <div class="hour-card">
-    <p>12:00</p>
-    <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
-    <p>28°C</p>
-  </div>
+<div class="search-box">
 
-  <div class="hour-card">
-    <p>03:00</p>
-    <img src="https://cdn-icons-png.flaticon.com/512/414/414825.png">
-    <p>25°C</p>
-  </div>
+<input
+type="text"
+id="cityInput"
+placeholder="Search city...">
 
-  <div class="hour-card">
-    <p>06:00</p>
-    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png">
-    <p>22°C</p>
-  </div>
+<button id="searchBtn">
+<i class="fas fa-search"></i>
+</button>
+
+<button id="locationBtn">
+<i class="fas fa-location-crosshairs"></i>
+</button>
 
 </div>
 
-  <!-- Info -->
-  <div class="info">
-    <div>Humidity: <span id="humidity"></span></div>
-    <div>Wind: <span id="wind"></span></div>
-    <div>Feels: <span id="feels"></span></div>
-  </div>
+</header>
 
-  <!-- Forecast -->
-   <div class="hourly" id="hourly"></div>
-  <div class="forecast" id="forecast"></div>
+<section class="main-card">
+
+<div class="top">
+
+<div>
+
+<h2 id="city">City</h2>
+
+<p id="date">Loading...</p>
+
+</div>
+
+<div class="clock" id="clock">
+
+--:--
+
+</div>
+
+</div>
+
+<div class="weather-icon">
+
+<img id="weatherIcon" src="" alt="weather">
+
+</div>
+
+<h1 id="temperature">
+
+--°C
+
+</h1>
+
+<p id="description">
+
+Loading...
+
+</p>
+
+<div class="high-low">
+
+<span id="maxTemp">
+
+H: --
+
+</span>
+
+<span id="minTemp">
+
+L: --
+
+</span>
+
+</div>
+
+</section>
+
+<section class="details">
+
+<div class="box">
+
+<i class="fas fa-temperature-half"></i>
+
+<h4>Feels Like</h4>
+
+<p id="feelsLike">--°</p>
+
+</div>
+
+<div class="box">
+
+<i class="fas fa-droplet"></i>
+
+<h4>Humidity</h4>
+
+<p id="humidity">--%</p>
+
+</div>
+
+<div class="box">
+
+<i class="fas fa-wind"></i>
+
+<h4>Wind</h4>
+
+<p id="wind">-- km/h</p>
+
+</div>
+
+<div class="box">
+
+<i class="fas fa-gauge-high"></i>
+
+<h4>Pressure</h4>
+
+<p id="pressure">----</p>
+
+</div>
+
+<div class="box">
+
+<i class="fas fa-eye"></i>
+
+<h4>Visibility</h4>
+
+<p id="visibility">-- km</p>
+
+</div>
+
+<div class="box">
+
+<i class="fas fa-sun"></i>
+
+<h4>UV Index</h4>
+
+<p id="uv">--</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">
+
+Today's Forecast
+
+</h2>
+
+<div id="hourlyForecast" class="hourly">
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title">
+
+7-Day Forecast
+
+</h2>
+
+<div id="weeklyForecast" class="weekly">
+
+</div>
+
+</section>
+
+<footer>
+
+Made with ❤️ by Aisha
+
+</footer>
 
 </div>
 
 <script src="script.js"></script>
-<input type="text" id="cityInput">
-<div id="forecast"></div>
-<img id="icon">
+
 </body>
 </html>

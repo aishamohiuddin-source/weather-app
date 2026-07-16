@@ -1,166 +1,358 @@
 const apiKey = "50b421d4a765aa82039d19a3fdc7092a";
 
-// 🔍 Get Weather by City
-async function getWeather() {
-  const city = document.getElementById("cityInput").value;
 
-  if (city === "") {
-    alert("Please enter a city name");
-    return;
-  }
+// ===============================
+// Search Weather
+// ===============================
 
-  try {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    );
+async function getWeather(){
 
-    const data = await res.json();
+    const cityInput = document.getElementById("cityInput");
+    const cityName = cityInput.value.trim();
 
-    if (data.cod !== 200) {
-      alert("City not found");
-      return;
+
+    if(cityName === ""){
+        alert("Please enter city name");
+        return;
     }
 
-    showWeather(data);
-    getForecast(city);
 
-  } catch (error) {
-    alert("Error fetching data");
-  }
-  getHourly(city);
+    try{
+
+        const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
+        );
+
+
+        const data = await res.json();
+
+
+        if(data.cod !== 200){
+            alert("City not found");
+            return;
+        }
+
+
+        showWeather(data);
+
+        getForecast(cityName);
+
+        getHourly(cityName);
+
+
+    }
+
+    catch(error){
+
+        alert("Something went wrong");
+
+    }
+
 }
 
 
-// 🌤 Show Current Weather
-function showWeather(data) {
-  document.getElementById("city").innerText = data.name;
-  document.getElementById("temp").innerText = Math.round(data.main.temp);
-  document.getElementById("desc").innerText = data.weather[0].description;
 
-  document.getElementById("humidity").innerText = data.main.humidity + "%";
-  document.getElementById("wind").innerText = data.wind.speed + " km/h";
-  document.getElementById("feels").innerText = Math.round(data.main.feels_like) + "°C";
+// ===============================
+// Show Current Weather
+// ===============================
 
-  const icon = data.weather[0].icon;
-  document.getElementById("icon").src =
-    `https://openweathermap.org/img/wn/${icon}@2x.png`;
+function showWeather(data){
+
+
+document.getElementById("city").innerText =
+`${data.name}, ${data.sys.country}`;
+
+
+document.getElementById("temp").innerText =
+Math.round(data.main.temp);
+
+
+document.getElementById("desc").innerText =
+data.weather[0].description;
+
+
+document.getElementById("humidity").innerText =
+data.main.humidity + "%";
+
+
+document.getElementById("wind").innerText =
+data.wind.speed + " km/h";
+
+
+document.getElementById("feels").innerText =
+Math.round(data.main.feels_like) + "°C";
+
+
+
+const icon = data.weather[0].icon;
+
+
+document.getElementById("icon").src =
+`https://openweathermap.org/img/wn/${icon}@2x.png`;
+
+
+
+changeBackground(data.weather[0].main);
+
+
 }
 
-const weatherMain = data.weather[0].main;
 
-if (weatherMain === "Clear") {
-  document.body.style.background = "linear-gradient(to right, #f7971e, #ffd200)";
-}
-else if (weatherMain === "Clouds") {
-  document.body.style.background = "linear-gradient(to right, #757f9a, #d7dde8)";
-}
-else if (weatherMain === "Rain") {
-  document.body.style.background = "linear-gradient(to right, #373B44, #4286f4)";
-}
-else if (weatherMain === "Snow") {
-  document.body.style.background = "linear-gradient(to right, #e6dada, #274046)";
-}
-else {
-  document.body.style.background = "linear-gradient(to bottom, #0f2027, #203a43, #2c5364)";
+
+// ===============================
+// Dynamic Background
+// ===============================
+
+function changeBackground(weather){
+
+
+if(weather==="Clear"){
+
+document.body.style.background =
+"linear-gradient(135deg,#f6d365,#fda085)";
+
 }
 
-// 📍 Get Location Weather
-function getLocation() {
-  navigator.geolocation.getCurrentPosition(async (pos) => {
 
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
+else if(weather==="Clouds"){
 
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-    );
+document.body.style.background =
+"linear-gradient(135deg,#757f9a,#d7dde8)";
 
-    const data = await res.json();
-
-    showWeather(data);
-    getForecast(data.name);
-
-  }, () => {
-    alert("Location access denied");
-  });
-  getHourly(data.name);
 }
 
-// 📅 5-Day Forecast
-async function getForecast(city) {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
-  );
 
-  const data = await res.json();
+else if(weather==="Rain"){
 
-  const forecastDiv = document.getElementById("forecast");
-  forecastDiv.innerHTML = "";
+document.body.style.background =
+"linear-gradient(135deg,#4facfe,#00f2fe)";
 
-  for (let i = 0; i < data.list.length; i += 8) {
-    const item = data.list[i];
-
-    const date = new Date(item.dt_txt);
-    const day = date.toLocaleDateString("en-US", { weekday: "short" });
-
-    const temp = Math.round(item.main.temp);
-    const icon = item.weather[0].icon;
-
-    const card = `
-      <div>
-        <p>${day}</p>
-        <img src="https://openweathermap.org/img/wn/${icon}.png"/>
-        <p>${temp}°C</p>
-      </div>
-    `;
-
-    forecastDiv.innerHTML += card;
-  }
 }
 
-async function getHourly(city) {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
-  );
 
-  const data = await res.json();
+else if(weather==="Snow"){
 
-  const hourlyDiv = document.getElementById("hourly");
-  hourlyDiv.innerHTML = "";
+document.body.style.background =
+"linear-gradient(135deg,#e6dada,#274046)";
 
-  // First 8 items = next 24 hours
-  for (let i = 0; i < 8; i++) {
-    const item = data.list[i];
-
-    const time = item.dt_txt.split(" ")[1].slice(0,5);
-    const temp = Math.round(item.main.temp);
-    const icon = item.weather[0].icon;
-
-    const card = `
-      <div>
-        <p>${time}</p>
-        <img src="https://openweathermap.org/img/wn/${icon}.png"/>
-        <p>${temp}°C</p>
-      </div>
-    `;
-
-    hourlyDiv.innerHTML += card;
-  }
-}
-const weather = data.weather[0].main;
-
-if (weather === "Clear") {
-  document.body.style.background = "linear-gradient(135deg, #f6d365, #fda085)";
-}
-else if (weather === "Clouds") {
-  document.body.style.background = "linear-gradient(135deg, #bdc3c7, #2c3e50)";
-}
-else if (weather === "Rain") {
-  document.body.style.background = "linear-gradient(135deg, #4facfe, #00f2fe)";
 }
 
-if (weather === "Rain") {
-  document.body.classList.add("rain");
-} else {
-  document.body.classList.remove("rain");
+
+else{
+
+document.body.style.background =
+"linear-gradient(135deg,#0f2027,#203a43)";
+
+}
+
+
+}
+
+
+
+
+// ===============================
+// Auto Location
+// ===============================
+
+function getLocation(){
+
+
+navigator.geolocation.getCurrentPosition(
+
+async(position)=>{
+
+
+const lat = position.coords.latitude;
+
+const lon = position.coords.longitude;
+
+
+
+const res = await fetch(
+
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+
+);
+
+
+
+const data = await res.json();
+
+
+
+showWeather(data);
+
+
+getForecast(data.name);
+
+getHourly(data.name);
+
+
+
+},
+
+
+()=>{
+
+alert("Location permission denied");
+
+}
+
+
+);
+
+
+}
+
+
+
+
+
+// ===============================
+// 5 Day Forecast
+// ===============================
+
+
+async function getForecast(city){
+
+
+const res = await fetch(
+
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+
+);
+
+
+
+const data = await res.json();
+
+
+
+const forecast =
+document.getElementById("forecast");
+
+
+
+forecast.innerHTML="";
+
+
+
+for(let i=0;i<data.list.length;i+=8){
+
+
+const item=data.list[i];
+
+
+const date =
+new Date(item.dt_txt);
+
+
+
+const day =
+date.toLocaleDateString(
+"en-US",
+{
+weekday:"short"
+}
+);
+
+
+
+const card = `
+
+<div class="forecast-card">
+
+<h3>${day}</h3>
+
+<img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+
+<p>${Math.round(item.main.temp)}°C</p>
+
+</div>
+
+`;
+
+
+
+forecast.innerHTML += card;
+
+
+}
+
+
+}
+
+
+
+
+
+// ===============================
+// Hourly Forecast
+// ===============================
+
+
+async function getHourly(city){
+
+
+const res = await fetch(
+
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+
+);
+
+
+
+const data = await res.json();
+
+
+
+const hourly =
+document.getElementById("hourly");
+
+
+
+hourly.innerHTML="";
+
+
+
+for(let i=0;i<8;i++){
+
+
+const item=data.list[i];
+
+
+
+const time =
+item.dt_txt.split(" ")[1].slice(0,5);
+
+
+
+const card = `
+
+
+<div class="hour-card">
+
+
+<h3>${time}</h3>
+
+
+<img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+
+
+<p>${Math.round(item.main.temp)}°C</p>
+
+
+</div>
+
+
+`;
+
+
+
+hourly.innerHTML += card;
+
+
+}
+
 }
