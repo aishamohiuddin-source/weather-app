@@ -18,7 +18,7 @@ A simple weather app that shows real-time weather using OpenWeather API.
 ## ⚙️ Setup
 
 1. Clone repo:
-git clone https://github.com/YOUR-USERNAME/weather-app.git
+git clone https://github.com/aishamohiuddin-source/weather-app.git
 
 2. Get API key:
 https://openweathermap.org/api
@@ -31,6 +31,9 @@ Open index.html
 
 ## 📌 Usage
 Enter city → Click Search → See weather
+
+## Live Demo
+https://weather-app-snowy-kappa-20.vercel.app/
 
 ## 🌍 Deployment
 Use Vercel
