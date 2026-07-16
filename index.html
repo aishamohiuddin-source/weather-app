@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weather App</title>
 
   <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="app">
 
-  <!-- 🔍 Search -->
+  <!-- Search -->
   <div class="search-box">
-    <input type="text" id="search" placeholder="Search city...">
-    <button onclick="getWeather()">Search</button>
+    <input type="text" id="cityInput" placeholder="Search city...">
+    <button onclick="getWeather()">🔍</button>
+    <button onclick="getLocation()">📍</button>
   </div>
 
-  <!-- 📍 Location Button -->
-  <button onclick="getLocation()">📍 Use My Location</button>
-
-  <!-- 🌤️ Weather Info -->
+  <!-- Weather Main -->
   <div class="weather-box">
     <h2 id="city">City</h2>
     <h1 id="temp">--°C</h1>
-    <p id="desc">Weather</p>
-
     <img id="icon" src="" />
+    <p id="desc">---</p>
   </div>
 
-  <!-- 📊 Details -->
-  <div class="details">
-    <div class="card">Humidity: <span id="humidity"></span></div>
-    <div class="card">Wind: <span id="wind"></span></div>
-    <div class="card">Feels: <span id="feels"></span></div>
+  <!-- Info -->
+  <div class="info">
+    <div>Humidity: <span id="humidity"></span></div>
+    <div>Wind: <span id="wind"></span></div>
+    <div>Feels: <span id="feels"></span></div>
   </div>
+
+  <!-- Forecast -->
+  <div class="forecast" id="forecast"></div>
 
 </div>
 

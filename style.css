@@ -3,49 +3,71 @@ body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
   color: white;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+/* App Card */
 .app {
-  max-width: 350px;
-  margin: auto;
+  width: 350px;
   padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
+/* Search */
 .search-box {
   display: flex;
   gap: 10px;
 }
 
-input {
+.search-box input {
   flex: 1;
   padding: 10px;
   border-radius: 10px;
   border: none;
 }
 
-button {
+.search-box button {
   padding: 10px;
-  border: none;
   border-radius: 10px;
-  background: #00c6ff;
-  color: white;
+  border: none;
   cursor: pointer;
+}
+
+/* Weather */
+.weather-box {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .weather-box img {
   width: 100px;
 }
 
-.details {
+/* Info */
+.info {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.card {
-  background: rgba(255,255,255,0.1);
+/* Forecast */
+.forecast {
+  margin-top: 20px;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.forecast div {
+  min-width: 60px;
   padding: 10px;
+  background: rgba(255,255,255,0.1);
   border-radius: 10px;
-  width: 30%;
+  text-align: center;
 }

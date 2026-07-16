@@ -1,33 +1,41 @@
 const apiKey = "50b421d4a765aa82039d19a3fdc7092a";
 
-function getWeather() {
-  let city = document.getElementById("search").value;
+// Weather by city
+async function getWeather() {
+  const city = document.getElementById("cityInput").value;
 
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-    .then(res => res.json())
-    .then(data => showData(data));
+  const res = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+  );
+  const data = await res.json();
+
+  showWeather(data);
 }
 
-function showData(data) {
+// Show data
+function showWeather(data) {
   document.getElementById("city").innerText = data.name;
-  document.getElementById("temp").innerText = Math.round(data.main.temp) + "°C";
-  document.getElementById("desc").innerText = data.weather[0].main;
-
+  document.getElementById("temp").innerText = data.main.temp + "°C";
+  document.getElementById("desc").innerText = data.weather[0].description;
   document.getElementById("humidity").innerText = data.main.humidity;
   document.getElementById("wind").innerText = data.wind.speed;
   document.getElementById("feels").innerText = data.main.feels_like;
 
-  let icon = data.weather[0].icon;
-  document.getElementById("icon").src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  document.getElementById("icon").src =
+    `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 }
+
+// Location
 function getLocation() {
-  navigator.geolocation.getCurrentPosition(position => {
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
 
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+    );
+    const data = await res.json();
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-      .then(res => res.json())
-      .then(data => showData(data));
+    showWeather(data);
   });
 }
