@@ -431,3 +431,17 @@ grid-template-columns:1fr;
 }
 
 }
+.forecast-card{
+    display:grid;
+    grid-template-columns:150px 90px 1fr 100px;
+    align-items:center;
+    background:rgba(255,255,255,.13);
+    backdrop-filter:blur(20px);
+    border-radius:22px;
+    padding:18px 22px;
+    transition:.3s;
+}
+
+.forecast-card:hover{
+    transform:scale(1.02);
+}
