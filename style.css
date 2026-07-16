@@ -1,73 +1,51 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #1d2b64, #f8cdda);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
-  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
   color: white;
+  text-align: center;
 }
 
-h1 {
-  margin-bottom: 20px;
+.app {
+  max-width: 350px;
+  margin: auto;
+  padding: 20px;
 }
 
 .search-box {
   display: flex;
-  justify-content: center;
   gap: 10px;
 }
 
 input {
-  padding: 12px;
-  width: 230px;
-  border-radius: 12px;
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  outline: none;
 }
 
 button {
-  padding: 12px 15px;
-  border-radius: 12px;
+  padding: 10px;
   border: none;
-  background: #ff7eb3;
+  border-radius: 10px;
+  background: #00c6ff;
   color: white;
   cursor: pointer;
 }
 
-.weather-card {
-  margin-top: 20px;
-  width: 330px;
-  padding: 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-.top {
-  text-align: center;
-}
-
-.top img {
-  width: 80px;
+.weather-box img {
+  width: 100px;
 }
 
 .details {
-  margin-top: 15px;
-}
-
-.details div {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
-  margin: 5px 0;
+  margin-top: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.2);
-  font-size: 14px;
+  width: 30%;
 }
