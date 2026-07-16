@@ -34,7 +34,7 @@ async function getWeather() {
 // 🌤 Show Current Weather
 function showWeather(data) {
   document.getElementById("city").innerText = data.name;
-  document.getElementById("temp").innerText = Math.round(data.main.temp) + "°C";
+  document.getElementById("temp").innerText = Math.round(data.main.temp);
   document.getElementById("desc").innerText = data.weather[0].description;
 
   document.getElementById("humidity").innerText = data.main.humidity + "%";
@@ -146,4 +146,21 @@ async function getHourly(city) {
 
     hourlyDiv.innerHTML += card;
   }
+}
+const weather = data.weather[0].main;
+
+if (weather === "Clear") {
+  document.body.style.background = "linear-gradient(135deg, #f6d365, #fda085)";
+}
+else if (weather === "Clouds") {
+  document.body.style.background = "linear-gradient(135deg, #bdc3c7, #2c3e50)";
+}
+else if (weather === "Rain") {
+  document.body.style.background = "linear-gradient(135deg, #4facfe, #00f2fe)";
+}
+
+if (weather === "Rain") {
+  document.body.classList.add("rain");
+} else {
+  document.body.classList.remove("rain");
 }
