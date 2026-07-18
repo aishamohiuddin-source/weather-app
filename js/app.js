@@ -229,5 +229,5 @@ function createRain(){
         container.appendChild(drop);
 
     }
-
+console.log(app.js Loaded successfully);
 }
