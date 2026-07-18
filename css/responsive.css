@@ -1,7 +1,49 @@
-@media(max-width:992px){
+/* ===========================
+   Laptop (1200px)
+=========================== */
+
+@media (max-width:1200px){
+
+.app{
+    width:95%;
+    margin:auto;
+}
+
+.weather-card,
+.hourly,
+.forecast,
+.highlights{
+    padding:25px;
+}
+
+#temperature{
+    font-size:70px;
+}
+
+#time{
+    font-size:55px;
+}
+
+}
+
+
+/* ===========================
+   Tablet (992px)
+=========================== */
+
+@media (max-width:992px){
+
+body{
+    padding:20px;
+}
 
 header{
     flex-direction:column;
+    gap:20px;
+}
+
+.logo{
+    justify-content:center;
 }
 
 .search-box{
@@ -12,36 +54,185 @@ header{
     width:100%;
 }
 
+.bottom-row{
+    flex-wrap:wrap;
+    gap:20px;
 }
 
-@media(max-width:768px){
+.highlights-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.forecast-container{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+
+/* ===========================
+   Mobile (768px)
+=========================== */
+
+@media (max-width:768px){
 
 body{
-    padding:15px;
+    padding:12px;
 }
 
-.weather-card,
-.hourly,
-.forecast,
-.highlights{
-    padding:20px;
+.app{
+    width:100%;
+}
+
+.tools{
+    justify-content:center;
+}
+
+.recent{
+    text-align:center;
+}
+
+#recentCities{
+    justify-content:center;
+}
+
+header{
+    flex-direction:column;
+    align-items:center;
 }
 
 .logo{
     font-size:22px;
 }
 
+.search-box{
+    width:100%;
 }
 
-@media(max-width:480px){
+.search-box input{
+    width:100%;
+}
+
+.weather-card,
+.hourly,
+.forecast,
+.highlights{
+    padding:18px;
+    border-radius:22px;
+}
+
+.top-row{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+#time{
+    font-size:42px;
+}
+
+#temperature{
+    font-size:60px;
+}
+
+#condition{
+    font-size:24px;
+}
+
+#cityName{
+    font-size:18px;
+}
+
+.bottom-row{
+    flex-direction:column;
+    gap:15px;
+}
+
+.forecast-container{
+    grid-template-columns:1fr;
+}
+
+.highlights-grid{
+    grid-template-columns:1fr;
+}
+
+.hour-card{
+    min-width:110px;
+}
+
+.highlight-card h2{
+    font-size:26px;
+}
+
+}
+
+
+/* ===========================
+   Small Mobile (480px)
+=========================== */
+
+@media (max-width:480px){
+
+body{
+    padding:8px;
+}
+
+.logo{
+    font-size:20px;
+}
+
+.logo i{
+    font-size:24px;
+}
+
+.search-box input{
+    height:45px;
+    font-size:15px;
+}
 
 .search-box button{
     width:45px;
     height:45px;
 }
 
-.search-box input{
-    height:45px;
+#time{
+    font-size:34px;
+}
+
+#temperature{
+    font-size:48px;
+}
+
+#condition{
+    font-size:20px;
+}
+
+#cityName{
+    font-size:16px;
+}
+
+.bottom-row h2{
+    font-size:22px;
+}
+
+.section-title h2{
+    font-size:22px;
+}
+
+.weather-center img{
+    width:110px;
+}
+
+.hour-card{
+    min-width:95px;
+}
+
+.forecast-card img{
+    width:60px;
+}
+
+.highlight-card{
+    padding:18px;
 }
 
 }

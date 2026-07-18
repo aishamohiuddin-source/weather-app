@@ -2,12 +2,8 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 
 <title>Weather App</title>
 
@@ -15,7 +11,6 @@
 <link rel="stylesheet" href="css/responsive.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,21 +21,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
-    <section class="tools">
-
-    <button id="unitBtn">🌡️ °C</button>
-
-    <button id="favBtn">⭐ Add Favorite</button>
-
-</section>
-
-<section class="recent">
-
-    <h3>Recent Searches</h3>
-
-    <div id="recentCities"></div>
-
-</section>
 
 <div class="loader hide" id="loader">
     <div class="spinner"></div>
@@ -48,17 +28,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <div id="weatherAnimation"></div>
 
-<div class="app">   
+<div class="app">
 
+<section class="tools">
+    <button id="unitBtn">🌡️ °C</button>
+    <button id="favBtn">⭐ Add Favorite</button>
+</section>
+
+<section class="recent">
+    <h3>Recent Searches</h3>
+    <div id="recentCities"></div>
+</section>
 
 <header>
 
 <div class="logo">
-
 <i class="fa-solid fa-cloud-sun"></i>
-
 <span>Weather App</span>
-
 </div>
 
 <div class="search-box">
@@ -69,15 +55,11 @@ id="searchInput"
 placeholder="Search city...">
 
 <button id="searchBtn">
-
 <i class="fa-solid fa-magnifying-glass"></i>
-
 </button>
 
 <button id="locationBtn">
-
 <i class="fa-solid fa-location-crosshairs"></i>
-
 </button>
 
 </div>
@@ -88,99 +70,87 @@ placeholder="Search city...">
 
 <section class="weather-card">
 
-    <div class="top-row">
+<div class="top-row">
 
-        <div class="day-box">
-            <h2 id="dayName">Saturday</h2>
-        </div>
+<div class="day-box">
+<h2 id="dayName">Saturday</h2>
+</div>
 
-        <div class="date-box">
-            <h2 id="date">July 18</h2>
-        </div>
+<div class="date-box">
+<h2 id="date">July 18</h2>
+</div>
 
-    </div>
+</div>
 
-    <div class="weather-center">
+<div class="weather-center">
 
-        <h1 id="time">04:51 PM</h1>
+<h1 id="time">04:51 PM</h1>
 
-        <img
-        id="weatherIcon"
-        src="https://openweathermap.org/img/wn/10d@4x.png"
-        alt="weather">
+<img
+id="weatherIcon"
+src="https://openweathermap.org/img/wn/10d@4x.png"
+alt="Weather">
 
-        <h2 id="temperature">44°C</h2>
+<h2 id="temperature">44°C</h2>
 
-        <h3 id="condition">Clouds</h3>
+<h3 id="condition">Clouds</h3>
 
-        <p id="cityName">
-            📍 Lahore, Pakistan
-        </p>
+<p id="cityName">📍 Lahore, Pakistan</p>
 
-    </div>
+</div>
 
-    <div class="bottom-row">
+<div class="bottom-row">
 
-        <div>
+<div>
+<small>Hi</small>
+<h2 id="highTemp">44°</h2>
+</div>
 
-            <small>Hi</small>
+<div>
+<small>Feels Like</small>
+<h2 id="feelsLike">46°</h2>
+</div>
 
-            <h2 id="highTemp">44°</h2>
+<div>
+<small>Lo</small>
+<h2 id="lowTemp">39°</h2>
+</div>
 
-        </div>
-
-        <div>
-
-            <small>Feels Like</small>
-
-            <h2 id="feelsLike">46°</h2>
-
-        </div>
-
-        <div>
-
-            <small>Lo</small>
-
-            <h2 id="lowTemp">39°</h2>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
 <section class="hourly">
 
-    <div class="section-title">
-        <h2>🕒 Hourly Forecast</h2>
-    </div>
+<div class="section-title">
+<h2>🕒 Hourly Forecast</h2>
+</div>
 
-    <div class="hourly-container" id="hourlyContainer">
+<div class="hourly-container" id="hourlyContainer">
 
-    </div>
+</div>
 
 </section>
 
 <section class="forecast">
 
-    <div class="section-title">
-        <h2>📅 5-Day Forecast</h2>
-    </div>
+<div class="section-title">
+<h2>📅 5-Day Forecast</h2>
+</div>
 
-    <div class="forecast-container" id="forecastContainer">
+<div class="forecast-container" id="forecastContainer">
 
-    </div>
+</div>
 
 </section>
 
 <section class="highlights">
 
-    <div class="section-title">
-        <h2>🌍 Weather Highlights</h2>
-    </div>
+<div class="section-title">
+<h2>🌍 Weather Highlights</h2>
+</div>
 
-    <div class="highlights-grid">
-
+<div class="highlights-grid">
         <div class="highlight-card">
             <i class="fa-solid fa-droplet"></i>
             <h4>Humidity</h4>
@@ -220,24 +190,18 @@ placeholder="Search city...">
     </div>
 
 </section>
+
 </main>
 
 </div>
 
 <script src="js/api.js"></script>
-
 <script src="js/location.js"></script>
-
 <script src="js/search.js"></script>
-
 <script src="js/hourly.js"></script>
-
 <script src="js/forecast.js"></script>
-
 <script src="js/storage.js"></script>
-
 <script src="js/app.js"></script>
 
 </body>
-
 </html>

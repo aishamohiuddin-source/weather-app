@@ -11,8 +11,8 @@ body{
     background:url("https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat fixed;
     display:flex;
     justify-content:center;
-    align-items:center;
-    padding:25px;
+    align-items:flex-start;
+    padding:30px 15px;
     overflow-x:hidden;
 }
 
@@ -26,8 +26,8 @@ body::before{
 }
 
 .app{
-    width:100%;
-    max-width:1400px;
+    width:main(1400px,100%);
+    margin:auto;
 }
 
 header{
@@ -56,10 +56,15 @@ header{
 .search-box{
     display:flex;
     gap:10px;
+    width:100%;
+    max-width:650px;
+    align-items:center;
+
 }
 
 .search-box input{
-    width:320px;
+    flex:1;
+    min-width:0;
     height:50px;
     border:none;
     outline:none;
@@ -70,6 +75,7 @@ header{
     backdrop-filter:blur(18px);
     font-size:16px;
 }
+
 
 .search-box input::placeholder{
     color:#ddd;
