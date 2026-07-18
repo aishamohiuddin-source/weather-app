@@ -1,7 +1,7 @@
 // =========================
 // OpenWeather API Key
 // =========================
-console.log(API_KEY.js loaded successfully);
+console.log("API_KEY.js loaded successfully");
 const API_KEY = "50b421d4a765aa82039d19a3fdc7092a";
 
 // =========================
