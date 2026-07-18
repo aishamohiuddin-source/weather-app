@@ -1,96 +1,223 @@
-// =========================
-// OpenWeather API Key
-// =========================
-console.log("API_KEY.js loaded successfully");
+// ===============================
+// OpenWeather API
+// ===============================
+
 const API_KEY = "50b421d4a765aa82039d19a3fdc7092a";
 
-// =========================
-// Get Weather By City
-// =========================
-async function getWeather(city) {
+console.log("API_KEY.js loaded successfully");
 
-    try {
 
-        const loader = document.getElementById("loader");
-        if (loader) loader.classList.remove("hide");
+// ===============================
+// Current Weather
+// ===============================
 
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${API_KEY}`;
+async function getWeather(city){
+
+    const loader = document.getElementById("loader");
+
+    if(loader){
+        loader.classList.remove("hide");
+    }
+
+
+    try{
+
+        const url =
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+
 
         const response = await fetch(url);
 
-        if (!response.ok) {
 
-            if (loader) loader.classList.add("hide");
+        if(!response.ok){
 
-            alert("City not found!");
+            throw new Error("City not found");
 
-            return;
         }
+
 
         const data = await response.json();
 
+
         updateUI(data);
 
-        if (typeof saveRecent === "function") {
+
+        if(typeof saveRecent === "function"){
             saveRecent(city);
         }
 
-        if (typeof getHourlyForecast === "function") {
-            getHourlyForecast(city);
+
+        getHourlyForecast(city);
+
+        getForecast(city);
+
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        alert(error.message);
+
+    }
+    finally{
+
+        if(loader){
+            loader.classList.add("hide");
         }
-
-        if (typeof getForecast === "function") {
-            getForecast(city);
-        }
-
-        if (loader) loader.classList.add("hide");
-
-    } catch (error) {
-
-        console.error("Weather Error:", error);
-
-        const loader = document.getElementById("loader");
-        if (loader) loader.classList.add("hide");
-
-        alert("Something went wrong. Check Console (F12).");
 
     }
 
 }
 
-// =========================
-// Temperature Toggle
-// =========================
-let isCelsius = true;
 
-const unitBtn = document.getElementById("unitBtn");
 
-if (unitBtn) {
 
-    unitBtn.addEventListener("click", () => {
+// ===============================
+// Location Weather
+// ===============================
 
-        const temp = document.getElementById("temperature");
 
-        if (!temp) return;
+async function getWeatherByCoords(lat,lon){
 
-        let value = parseInt(temp.innerText);
 
-        if (isCelsius) {
+    const loader = document.getElementById("loader");
 
-            temp.innerHTML = Math.round((value * 9 / 5) + 32) + "°F";
 
-            unitBtn.innerHTML = "🌡️ °F";
+    if(loader){
+        loader.classList.remove("hide");
+    }
 
-        } else {
 
-            temp.innerHTML = Math.round((value - 32) * 5 / 9) + "°C";
+    try{
 
-            unitBtn.innerHTML = "🌡️ °C";
+
+        const url =
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+
+
+        const response = await fetch(url);
+
+
+        const data = await response.json();
+
+
+        updateUI(data);
+
+
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        alert("Location weather error");
+
+    }
+    finally{
+
+        if(loader){
+            loader.classList.add("hide");
+        }
+
+    }
+
+
+}
+
+
+
+
+// ===============================
+// Hourly Forecast
+// ===============================
+
+
+async function getHourlyForecast(city){
+
+
+    try{
+
+
+        const url =
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
+
+
+        const response = await fetch(url);
+
+
+        const data = await response.json();
+
+
+        if(typeof showHourly === "function"){
+
+            showHourly(data.list);
 
         }
 
-        isCelsius = !isCelsius;
 
-    });
+    }
+    catch(error){
+
+        console.log("Hourly Error:",error);
+
+    }
+
 
 }
+
+
+
+
+// ===============================
+// 5 Day Forecast
+// ===============================
+
+
+async function getForecast(city){
+
+
+    try{
+
+
+        const url =
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
+
+
+        const response = await fetch(url);
+
+
+        const data = await response.json();
+
+
+
+        if(typeof showForecast === "function"){
+
+            showForecast(data.list);
+
+        }
+
+
+    }
+    catch(error){
+
+        console.log("Forecast Error:",error);
+
+    }
+
+
+}
+
+
+
+
+// ===============================
+// Default City On Start
+// ===============================
+
+
+window.addEventListener("load",()=>{
+
+    getWeather("Lahore");
+
+});
