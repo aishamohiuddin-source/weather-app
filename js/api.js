@@ -17,29 +17,36 @@ async function getWeather(city) {
     saveRecent(city);
     getHourlyForecast(city);
     getForecast(city);
+    let isCelsius = true;
+
+const unitBtn = document.getElementById("unitBtn");
+
+if (unitBtn) {
+
+    unitBtn.addEventListener("click", () => {
+
+        const temp = document.getElementById("temperature");
+
+        let value = parseInt(temp.innerText);
+
+        if (isCelsius) {
+
+            temp.innerHTML = Math.round((value * 9 / 5) + 32) + "°F";
+
+            unitBtn.innerHTML = "🌡️ °F";
+
+        } else {
+
+            temp.innerHTML = Math.round((value - 32) * 5 / 9) + "°C";
+
+            unitBtn.innerHTML = "🌡️ °C";
+
+        }
+
+        isCelsius = !isCelsius;
+
+    });
+
+
 }
-let isCelsius = true;
-
-document.getElementById("unitBtn").addEventListener("click",()=>{
-
-const temp=document.getElementById("temperature");
-
-let value=parseInt(temp.innerText);
-
-if(isCelsius){
-
-temp.innerHTML=Math.round((value*9/5)+32)+"°F";
-
-document.getElementById("unitBtn").innerHTML="🌡️ °F";
-
-}else{
-
-temp.innerHTML=Math.round((value-32)*5/9)+"°C";
-
-document.getElementById("unitBtn").innerHTML="🌡️ °C";
-
 }
-
-isCelsius=!isCelsius;
-
-});
