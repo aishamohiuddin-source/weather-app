@@ -1,0 +1,47 @@
+@media(max-width:992px){
+
+header{
+    flex-direction:column;
+}
+
+.search-box{
+    width:100%;
+}
+
+.search-box input{
+    width:100%;
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+    padding:15px;
+}
+
+.weather-card,
+.hourly,
+.forecast,
+.highlights{
+    padding:20px;
+}
+
+.logo{
+    font-size:22px;
+}
+
+}
+
+@media(max-width:480px){
+
+.search-box button{
+    width:45px;
+    height:45px;
+}
+
+.search-box input{
+    height:45px;
+}
+
+}
